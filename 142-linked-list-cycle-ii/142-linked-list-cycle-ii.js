@@ -13,12 +13,12 @@
 var detectCycle = function (head) {
     let node = head
     while(node){
-        if (node.visited) {
-            delete node.visited
+        if (node.fuck) {
+          //  delete node.visited
             return node
         }
         else{
-            node.visited = true
+            node.fuck = true
             node = node.next
         }
     }
