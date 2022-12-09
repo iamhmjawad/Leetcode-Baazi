@@ -11,16 +11,30 @@
  * @return {ListNode}
  */
 var detectCycle = function (head) {
-    let node = head
-    while(node){
-        if (node.fuck) {
-          //  delete node.visited
-            return node
+    
+    let slow = head
+    let fast = head
+
+    var hasCycle = function (head) {
+        while (fast && fast.next) {
+            slow = slow.next
+            fast = fast.next.next;
+            if (slow === fast) {
+                return true
+            }
         }
-        else{
-            node.fuck = true
-            node = node.next
-        }
+        return false;
+    };
+
+    // if no cycle present
+    let cyclePresent = hasCycle(head)
+    if (!cyclePresent) return null;
+    // REMEMBER: fast pointer is present there where it met slow in hasCycle function.
+    // updating the position of slow pointer
+    slow = head
+    while (slow != fast) {
+        slow = slow.next
+        fast = fast.next
     }
-    return node
-}
+    return slow
+};
